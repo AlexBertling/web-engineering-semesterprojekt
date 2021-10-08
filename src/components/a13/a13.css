@@ -1,0 +1,12 @@
+.a13 .header {
+    background: lightgrey;
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    padding: 15px;
+}
+.a13 .content {
+    padding: 0 30px ;
+}
+.a13 .content img {
+    width: 100%;
+}
