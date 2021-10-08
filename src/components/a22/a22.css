@@ -1,0 +1,50 @@
+.a22 .body {
+    display: grid;
+    grid-template: 1fr 1fr 10fr 1fr / 1fr;
+    height: calc(100vh - 2rem);
+}
+
+.a22 .red {
+    background-color: red;
+}
+
+.a22 .green {
+    background-color: greenyellow;
+}
+
+.a22 .blue {
+    background-color: blue;
+}
+
+.a22 .pink {
+    background-color: violet;
+}
+
+@media (min-width: 576px) {
+    .a22 .body {
+        grid-template: 1fr 8fr 1fr / 1fr 2fr;
+    }
+    .a22 .red, 
+    .a22 .pink {
+        grid-column: 1 / 3;
+    }
+}
+
+@media (min-width: 768px) {
+    .a22 .body {
+        grid-template: 1fr 2fr / 1fr 3fr 1fr;
+    }
+
+    .a22 .red {
+        grid-column: 1/4;
+    }
+    .a22 .green {
+        grid-column: 1/2;
+    }
+    .a22 .blue {
+        grid-column: 2/3;
+    }
+    .a22 .pink {
+        grid-column: 3/4;
+    }
+}
