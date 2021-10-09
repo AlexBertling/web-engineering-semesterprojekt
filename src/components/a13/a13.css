@@ -1,3 +1,7 @@
+body {
+    padding: 0 !important;
+}
+
 .a13 .header {
     background: lightgrey;
     font-family: Helvetica, sans-serif;
