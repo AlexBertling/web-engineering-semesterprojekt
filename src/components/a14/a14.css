@@ -34,13 +34,13 @@
 .a14 .formRow .label {
     text-align: right;
 }
-input[type="text"],
-input[type="email"],
+.a14 input[type="text"],
+.a14 input[type="email"],
 .a14 input[type="number"] {
     line-height: 30px;
     width: 250px;
 }
-input[type="radio"] + label,
+.a14 input[type="radio"] + label,
 .a14 input[type="checkbox"] + label {
     padding: 3px 0;
     display: inline-block;
