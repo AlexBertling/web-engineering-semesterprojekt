@@ -12,10 +12,10 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@storybook/addon-actions": "^6.4.1",
-    "@storybook/addon-essentials": "^6.4.1",
-    "@storybook/addon-links": "^6.4.1",
-    "@storybook/web-components": "^6.4.1",
+    "@storybook/addon-actions": "^6.4.5",
+    "@storybook/addon-essentials": "^6.4.5",
+    "@storybook/addon-links": "^6.4.5",
+    "@storybook/web-components": "^6.4.5",
     "babel-loader": "^8.2.3"
   },
   "dependencies": {
