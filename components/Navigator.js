@@ -24,22 +24,6 @@ import PropTypes from "prop-types";
             padding: 5px;
         }
         
-        header nav {
-            padding-top: 5px;
-            padding-bottom: 15px;
-        }
-        
-        header nav a {
-            padding: 5px 20px;
-            margin: 0 10px;
-            background-color: #6a709f;
-            color: black;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 13px;
-            border: 3px solid #ece9e9;
-        }
-        
         aside {
             background-color: #c28281;
             color: white;
@@ -95,42 +79,60 @@ import PropTypes from "prop-types";
     `;
     static properties = {
         styleMode: {type: String},
+        data: {},
+        nav1: {type: Array},
+        nav2: {type: Array},
+        nav1Selected: {type: String},
+        nav2Selected: {type: String},
+        content: {type: String},
+        references: {type: Array}
     }
 
     constructor() {
         super();
+        this.nav1 = [];//["Home, News, Contact, About"];
+        this.nav2 = [];//["Item1", "Item2", "Item3"];
+        this.content = "";
+        this.references = [];
+        fetch("/navigator.json")
+            .then((data) => data.json())
+            .then((json) => {
+                this.nav1 = Object.keys(json);
+                this.data = json;
+            });
+        
+    }
+
+    _handleMenu1Click(e){
+        console.log(e.detail);
+        this.nav1Selected = e.detail;
+        this.nav2 = Object.keys(this.data[e.detail]);
+    }
+
+    _handleMenu2Click(e){
+        console.log(e.detail);
+        this.nav2Selected = e.detail;
+        this.content = this.data[this.nav1Selected][this.nav2Selected].content;
+        this.references = this.data[this.nav1Selected][this.nav2Selected].references;
     }
 
     render() {
         return html`
             <header>
                 <h1>Header</h1>
-                <nav>
-                    <a href="#">Home</a>
-                    <a href="#">News</a>
-                    <a href="#">Contact</a>
-                    <a href="#">About</a>
-                </nav>
+                <wem-menu orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
             </header>
             <main class="${this.styleMode}">
                 <aside class="left">
-                    left menu with many items
+                    <wem-menu orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
                 </aside>
                 <section>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.   
-
-Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.   
-
-Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.   
-
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis.   
-
-At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, At accusam aliquyam diam diam dolore dolores duo eirmod eos erat, et nonumy sed tempor et et invidunt justo labore Stet clita ea et gubergren, kasd magna no rebum. sanctus sea sed takimata ut vero voluptua. est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur
+                    ${this.content}
                 </section>
                 <aside class="right">
-                    right
+                    <ul>
+                        ${this.references.map(r => html`<li>${r}</li>`)}
+                    </ul>
                 </aside>
             </main>
             <footer>
