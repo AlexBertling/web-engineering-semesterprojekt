@@ -7,20 +7,23 @@ export default {
         styleMode: {
             options: ["grid", "flex"],
             control: {type: "radio"}
-        }
+        },
+        dataUrl: String
     }
 };
 
-const Template = ({ styleMode }) => html`
-    <wem-navigator styleMode=${styleMode}></wem-navigator>
+const Template = ({ styleMode, dataUrl }) => html`
+    <wem-navigator styleMode=${styleMode} dataUrl=${dataUrl}></wem-navigator>
 `;
 
 export const Grid = Template.bind({});
 Grid.args = {
-    styleMode: "grid"
+    styleMode: "grid",
+    dataUrl: "/navigator.json"
 }
 
 export const Flex = Template.bind({});
 Flex.args = {
-    styleMode: "flex"
+    styleMode: "flex",
+    dataUrl: "/navigator.json"
 }

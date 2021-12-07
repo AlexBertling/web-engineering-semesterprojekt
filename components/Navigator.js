@@ -18,7 +18,8 @@ import PropTypes from "prop-types";
         nav1Selected: {type: String},
         nav2Selected: {type: String},
         content: {type: String},
-        references: {type: Array}
+        references: {type: Array},
+        dataUrl: {type: String}
     }
 
     constructor() {
@@ -28,14 +29,20 @@ import PropTypes from "prop-types";
         this.content = "";
         this.references = [];
         this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
-        fetch("/navigator.json")
-            .then((data) => data.json())
-            .then((json) => {
-                this.nav1 = Object.keys(json);
-                this.data = json;
-            });
-        
     }
+
+    attributeChangedCallback(name, oldVal, newVal) {
+        super.attributeChangedCallback(name, oldVal, newVal);
+        if(name == "dataurl") {
+            fetch(this.dataUrl)
+                .then((data) => data.json())
+                .then((json) => {
+                    this.nav1 = Object.keys(json);
+                    this.nav2 = [];
+                    this.data = json;
+            });
+        }
+      }
 
     _handleMenu1Click(e){
         console.log(e.detail);
