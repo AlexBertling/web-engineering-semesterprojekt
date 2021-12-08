@@ -1,4 +1,4 @@
-import WEMNavigator from './Navigator';
+import WEMNavigator from '../components/Navigator';
 import { html } from 'lit';
 
 export default {

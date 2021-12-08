@@ -1,4 +1,4 @@
-import WEMMain from './Main';
+import WEMMain from '../components/Main';
 import { html } from 'lit';
 import { Vertical } from './Menu.stories';
 

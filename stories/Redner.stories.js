@@ -1,4 +1,4 @@
-import Redner from './Redner';
+import Redner from '../components/Redner';
 import { html } from 'lit';
 
 export default {
