@@ -16,7 +16,8 @@
     "@storybook/addon-essentials": "^6.4.8",
     "@storybook/addon-links": "^6.4.8",
     "@storybook/web-components": "^6.4.8",
-    "babel-loader": "^8.2.3"
+    "babel-loader": "^8.2.3",
+    "es-dev-server": "^2.1.0"
   },
   "dependencies": {
     "lit": "^2.0.2"
