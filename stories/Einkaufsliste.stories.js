@@ -1,4 +1,4 @@
-import Einkaufsliste from '../components/Einkaufsliste.js';
+import Einkaufsliste from '../src/Einkaufsliste.js';
 import { html } from 'lit';
 
 export default {

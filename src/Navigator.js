@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import PropTypes from "prop-types";
 
 /**
  * 

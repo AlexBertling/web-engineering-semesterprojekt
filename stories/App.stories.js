@@ -1,4 +1,4 @@
-import WEMApp from '../components/App';
+import WEMApp from '../src/App';
 import { html } from 'lit';
 
 export default {
@@ -19,11 +19,11 @@ const Template = ({ styleMode, dataUrl }) => html`
 export const Grid = Template.bind({});
 Grid.args = {
     styleMode: "grid",
-    dataUrl: "/navigator.json"
+    dataUrl: "/assets/navigator.json"
 }
 
 export const Flex = Template.bind({});
 Flex.args = {
     styleMode: "flex",
-    dataUrl: "/navigator.json"
+    dataUrl: "/assets/navigator.json"
 }

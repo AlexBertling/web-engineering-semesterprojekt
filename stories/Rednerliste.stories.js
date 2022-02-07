@@ -1,4 +1,4 @@
-import Rednerliste from '../components/Rednerliste';
+import Rednerliste from '../src/Rednerliste';
 import { html } from 'lit';
 
 export default {

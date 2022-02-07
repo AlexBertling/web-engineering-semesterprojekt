@@ -1,4 +1,4 @@
-import WEMHeader from '../components/Header';
+import WEMHeader from '../src/Header';
 import { html } from 'lit';
 import { Horizontal } from './Menu.stories';
 

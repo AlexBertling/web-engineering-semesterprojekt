@@ -1,25 +1,21 @@
 {
   "name": "web-engineering-semesterprojekt",
+  "description": "Semesterprojekt zur Masterveranstaltung Web Engineering",
+  "author": "alexander-bertling@web.de",
   "version": "0.1.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.16.0",
-    "@storybook/addon-actions": "^6.4.8",
-    "@storybook/addon-essentials": "^6.4.8",
-    "@storybook/addon-links": "^6.4.8",
-    "@storybook/web-components": "^6.4.8",
-    "babel-loader": "^8.2.3",
-    "es-dev-server": "^2.1.0"
+    "storybook": "npm run analyze -- --exclude dist && web-dev-server -c .storybook/server.mjs",
+    "storybook:build": "npm run analyze -- --exclude dist && build-storybook",
+    "analyze": "cem analyze --litelement",
+    "start": "web-dev-server"
   },
   "dependencies": {
     "lit": "^2.0.2"
-  }
+  },
+  "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.4.17",
+    "@web/dev-server": "^0.1.28",
+    "@web/dev-server-storybook": "next"
+  },
+  "customElements": "custom-elements.json"
 }
