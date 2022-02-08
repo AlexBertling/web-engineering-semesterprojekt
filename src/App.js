@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import { Router } from '@vaadin/router';
 
 import Header from "./Header.js"
 import Main from "./Main.js"
@@ -8,6 +7,7 @@ import Menu from "./Menu.js"
 
 import Start from "./Start.js"
 import Navigator from "./Navigator.js"
+import { router } from "./Router.js"
 
 class WEMApp extends LitElement {
   static styles = css`
@@ -37,23 +37,8 @@ class WEMApp extends LitElement {
   }
 
   firstUpdated(){
-    const router = new Router(this.shadowRoot?.querySelector('#routerOutlet'));
-    router.setRoutes([
-        {
-            path: "",
-            animate: true, 
-            children: [
-                {path: "/", component: "wem-navigator"},
-                {
-                    path: "/:subject", 
-                    component: "wem-start",
-                    children: [
-                        {path: "/:entry", component:"wem-start"}
-                    ]
-                },
-            ]
-        }
-    ]);
+    //const router = new Router(this.shadowRoot?.querySelector('#routerOutlet'));
+    router.setOutlet(this.shadowRoot?.querySelector('#routerOutlet'));
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
@@ -62,7 +47,8 @@ class WEMApp extends LitElement {
           fetch(this.dataUrl)
               .then((data) => data.json())
               .then((json) => {
-                  this.nav1 = Object.keys(json);
+                  this.headerText = json.header;
+                  this.nav1 = Object.keys(json.menu);
                   this.nav2 = [];
                   this.data = json;
           });
@@ -72,7 +58,7 @@ class WEMApp extends LitElement {
   _handleMenu1Click(e){
       console.log(e.detail);
       this.nav1Selected = e.detail;
-      this.nav2 = Object.keys(this.data[e.detail]);
+      this.nav2 = this.data.menu[e.detail].map(el => el.title);
       this.nav2Selected = null;
       this.content = "";
       this.references = [];
@@ -81,13 +67,13 @@ class WEMApp extends LitElement {
   _handleMenu2Click(e){
       console.log(e.detail);
       this.nav2Selected = e.detail;
-      this.content = this.data[this.nav1Selected][this.nav2Selected].content;
-      this.references = this.data[this.nav1Selected][this.nav2Selected].references;
+      //this.content = this.data[this.nav1Selected][this.nav2Selected].content;
+      //this.references = this.data[this.nav1Selected][this.nav2Selected].references;
   }
 
   render() {
       return html`
-          <wem-header text="Header">
+          <wem-header text="${this.headerText}">
               <wem-menu orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
           </wem-header>
           <wem-main styleMode="${this.styleMode}">
