@@ -1,9 +1,13 @@
 import { LitElement, html, css } from 'lit';
+import { Router } from '@vaadin/router';
 
 import Header from "./Header.js"
 import Main from "./Main.js"
 import Footer from "./Footer.js"
 import Menu from "./Menu.js"
+
+import Start from "./Start.js"
+import Navigator from "./Navigator.js"
 
 class WEMApp extends LitElement {
   static styles = css`
@@ -30,6 +34,26 @@ class WEMApp extends LitElement {
       this.content = "";
       this.references = [];
       this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
+  }
+
+  firstUpdated(){
+    const router = new Router(this.shadowRoot?.querySelector('#routerOutlet'));
+    router.setRoutes([
+        {
+            path: "",
+            animate: true, 
+            children: [
+                {path: "/", component: "wem-navigator"},
+                {
+                    path: "/:subject", 
+                    component: "wem-start",
+                    children: [
+                        {path: "/:entry", component:"wem-start"}
+                    ]
+                },
+            ]
+        }
+    ]);
   }
 
   attributeChangedCallback(name, oldVal, newVal) {
@@ -67,8 +91,8 @@ class WEMApp extends LitElement {
               <wem-menu orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
           </wem-header>
           <wem-main styleMode="${this.styleMode}">
-              <wem-menu slot="left" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
-              <div slot="center">${this.content}</div>
+              <wem-menu slot="left" baseUrl="${this.nav1Selected}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
+              <div slot="center"><div id="routerOutlet"></div></div>
               <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
           </wem-main>
           <wem-footer items="${this.footerItems}"></wem-footer>

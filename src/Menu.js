@@ -35,6 +35,7 @@ class WEMMenu extends LitElement {
         }
     `;
     static properties = {
+        baseUrl: {type: String},
         orientation: { type: String },
         items: {
             converter: {
@@ -49,14 +50,14 @@ class WEMMenu extends LitElement {
     }
 
     _dispatchClick(e) {
-        e.preventDefault();
+        //e.preventDefault();
         this.dispatchEvent(new CustomEvent("menuClick", { detail: e.target.innerText, bubbles: true }));
     }
 
     render() {
         return html`
             <nav class="${this.orientation}">
-                ${this.items.map((i) => html`<a href="#" @click="${this._dispatchClick}">${i}</a>`)}
+                ${this.items.map((i) => html`<a href="${this.baseUrl}/${i}" @click="${this._dispatchClick}">${i}</a>`)}
             </nav>
         `;
     }
