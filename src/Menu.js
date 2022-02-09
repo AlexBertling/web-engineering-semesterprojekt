@@ -36,6 +36,7 @@ class WEMMenu extends LitElement {
     `;
     static properties = {
         baseUrl: {type: String},
+        preventRouting: {type: Boolean},
         orientation: { type: String },
         items: {
             converter: {
@@ -50,7 +51,7 @@ class WEMMenu extends LitElement {
     }
 
     _dispatchClick(e) {
-        //e.preventDefault();
+        if (this.preventRouting) e.preventDefault();
         this.dispatchEvent(new CustomEvent("menuClick", { detail: e.target.innerText, bubbles: true }));
     }
 
