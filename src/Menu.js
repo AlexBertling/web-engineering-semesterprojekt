@@ -58,7 +58,7 @@ class WEMMenu extends LitElement {
     render() {
         return html`
             <nav class="${this.orientation}">
-                ${this.items.map((i) => html`<a href="${this.baseUrl}/${i}" @click="${this._dispatchClick}">${i}</a>`)}
+                ${this.items.map((i) => html`<a href="${this.baseUrl+i}" @click="${this._dispatchClick}">${i}</a>`)}
             </nav>
         `;
     }
