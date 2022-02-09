@@ -14,6 +14,22 @@ class WEMApp extends LitElement {
       * {
           box-sizing: border-box;
       } 
+      .app-container {
+          height: 100vh;
+          display: flex;
+          flex-direction: column;
+      }
+      wem-main {
+          flex-grow: 1;
+      }
+      div[slot=center],
+      #routerOutlet {
+          height: 100%;
+      }
+      iframe {
+          width: 100%;
+          height: 100%;
+      }
   `;
   static properties = {
       styleMode: {type: String},
@@ -51,6 +67,7 @@ class WEMApp extends LitElement {
                   this.nav1 = Object.keys(json.menu);
                   this.nav2 = [];
                   this.data = json;
+                  router.setAppConfig(json);
           });
       }
     }
@@ -73,6 +90,7 @@ class WEMApp extends LitElement {
 
   render() {
       return html`
+        <div class="app-container">
           <wem-header text="${this.headerText}">
               <wem-menu orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
           </wem-header>
@@ -82,6 +100,7 @@ class WEMApp extends LitElement {
               <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
           </wem-main>
           <wem-footer items="${this.footerItems}"></wem-footer>
+        </div>
       `;
   }  
 };

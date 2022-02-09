@@ -25,6 +25,10 @@ class WEMMain extends LitElement {
         /* FLEX */
         main.flex {
             display: flex;
+            height: 100%;
+        }
+        main.flex section {
+            flex-grow: 1;
         }
         main.flex aside {
             min-width: 20%;

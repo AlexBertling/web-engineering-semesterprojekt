@@ -12,27 +12,32 @@
             },
             {
                 "title": "Wireframe Tribute Page",
-                "type": "html"
+                "type": "html",
+                "url": "/assets/a13.html"
             },
             {
                 "title": "Wireframe Survey Form",
-                "type": "html"
+                "type": "html",
+                "url": "/assets/a14.html"
             },
             {
                 "title": "Wireframe Product Landing Page",
-                "type": "html"
+                "type": "html",
+                "url": "/assets/a15.html"
             }
         ],
         "Modular Web": [
             {
                 "title": "Einkaufsliste",
                 "type": "component",
-                "url":  "/src/Einkaufsliste.js"
+                "url":  "/src/Einkaufsliste.js",
+                "element": "wem-einkaufsliste"
             },
             {
                 "title": "Rednerliste",
                 "type": "component",
-                "url":  "/src/Rednerliste.js"
+                "url":  "/src/Rednerliste.js",
+                "element": "wem-rednerliste"
             }
         ]
     }
