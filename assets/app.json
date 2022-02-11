@@ -30,13 +30,13 @@
             {
                 "title": "Einkaufsliste",
                 "type": "component",
-                "url":  "/src/Einkaufsliste.js",
+                "url":  "src/Einkaufsliste.js",
                 "element": "wem-einkaufsliste"
             },
             {
                 "title": "Rednerliste",
                 "type": "component",
-                "url":  "/src/Rednerliste.js",
+                "url":  "src/Rednerliste.js",
                 "element": "wem-rednerliste"
             }
         ]

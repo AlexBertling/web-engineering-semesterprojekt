@@ -11,7 +11,7 @@ const renderContent = async (context, commands) => {
                     stubElement.innerHTML = entry.title;
                     return stubElement;
                 } else if (entry.type == "component") {
-                    await import(entry.url);
+                    await import(document.baseURI + entry.url);
                     console.log("import done");
                     return commands.component(entry.element);
                 } else if (entry.type == "html") {

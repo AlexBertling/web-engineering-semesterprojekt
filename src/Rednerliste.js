@@ -1,5 +1,5 @@
 import { LitElement, html, css } from 'lit';
-import Redner from './Redner';
+import Redner from './Redner.js';
 
 /**
  * 
