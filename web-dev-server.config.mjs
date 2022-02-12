@@ -4,8 +4,8 @@
 const hmr = process.argv.includes('--hmr');
 
 export default /** @type {import('@web/dev-server').DevServerConfig} */ ({
-  open: '/web-engineering-semesterprojekt/',
-  basePath: "/web-engineering-semesterprojekt/",
+  open: '/',
+  basePath: "/",
   watch: !hmr,
   /** Resolve bare module imports */
   /*nodeResolve: {
