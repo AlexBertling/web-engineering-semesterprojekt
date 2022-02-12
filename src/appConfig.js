@@ -1,4 +1,7 @@
-{
+import Einkaufsliste from "./Einkaufsliste.js";
+import Rednerliste from "./Rednerliste.js";
+
+export const appConfig = {
     "header": "Web Engineering Solution Navigator",
     "menu": {
         "HTTP-URI-HTML-CSS": [

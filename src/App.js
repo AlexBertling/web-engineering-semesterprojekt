@@ -9,6 +9,8 @@ import Start from "./Start.js"
 import Navigator from "./Navigator.js"
 import { router } from "./Router.js"
 
+import { appConfig } from './appConfig.js';
+
 class WEMApp extends LitElement {
   static styles = css`
       * {
@@ -40,7 +42,7 @@ class WEMApp extends LitElement {
       nav2Selected: {type: String},
       content: {type: String},
       references: {type: Array},
-      dataUrl: {type: String}
+      //dataUrl: {type: String}
   }
 
   constructor() {
@@ -50,6 +52,7 @@ class WEMApp extends LitElement {
       this.content = "";
       this.references = [];
       this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
+      this.applyAppConfig();
   }
 
   firstUpdated(){
@@ -57,19 +60,12 @@ class WEMApp extends LitElement {
     router.setOutlet(this.shadowRoot?.querySelector('#routerOutlet'));
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-      super.attributeChangedCallback(name, oldVal, newVal);
-      if(name == "dataurl") {
-          fetch(this.dataUrl)
-              .then((data) => data.json())
-              .then((json) => {
-                  this.headerText = json.header;
-                  this.nav1 = Object.keys(json.menu);
-                  this.nav2 = [];
-                  this.data = json;
-                  router.setAppConfig(json);
-          });
-      }
+  applyAppConfig() {
+    this.headerText = appConfig.header;
+    this.nav1 = Object.keys(appConfig.menu);
+    this.nav2 = [];
+    this.data = appConfig;
+    router.setAppConfig(appConfig);
     }
 
   _handleMenu1Click(e){
