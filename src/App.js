@@ -1,9 +1,9 @@
 import { LitElement, html, css } from 'lit';
 
-import Header from "./Header.js"
 import Main from "./Main.js"
 import Footer from "./Footer.js"
 import Menu from "./Menu.js"
+import Navbar from "./Navbar.js"
 
 import Start from "./Start.js"
 import Navigator from "./Navigator.js"
@@ -31,6 +31,7 @@ class WEMApp extends LitElement {
       iframe {
           width: 100%;
           height: 100%;
+          min-height: 420px;
       }
   `;
   static properties = {
@@ -88,15 +89,13 @@ class WEMApp extends LitElement {
       console.log(document.baseURI+this.nav1Selected);
       return html`
         <div class="app-container">
-          <wem-header text="${this.headerText}">
-              <wem-menu baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
-          </wem-header>
+          <wem-navbar baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-navbar>
           <wem-main styleMode="${this.styleMode}">
               <wem-menu slot="left" baseUrl="${document.baseURI+this.nav1Selected+"/"}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
               <div slot="center"><div id="routerOutlet"></div></div>
               <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
           </wem-main>
-          <wem-footer items="${this.footerItems}"></wem-footer>
+          <wem-footer></wem-footer>
         </div>
       `;
   }  

@@ -17,6 +17,7 @@ const renderContent = async (context, commands) => {
                 } else if (entry.type == "html") {
                     const iframe = commands.component("iframe");
                     iframe.src = entry.url;
+                    iframe.frameBorder = "0";
                     return iframe;
                 }
             }

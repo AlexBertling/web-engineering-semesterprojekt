@@ -43,4 +43,4 @@ class WEMHeader extends LitElement {
 
 export default WEMHeader;
 
-customElements.define("wem-header", WEMHeader);
+customElements.define("wem-navigator-header", WEMHeader);

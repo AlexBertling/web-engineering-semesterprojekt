@@ -62,15 +62,15 @@ import { LitElement, html, css } from 'lit';
 
     render() {
         return html`
-            <wem-header text="Header">
-                <wem-menu preventRouting="true" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-menu>
-            </wem-header>
-            <wem-main styleMode="${this.styleMode}">
-                <wem-menu preventRouting="true" slot="left" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
+            <wem-navigator-header text="Header">
+                <wem-navigator-menu preventRouting="true" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-navigator-menu>
+            </wem-navigator-header>
+            <wem-navigator-main styleMode="${this.styleMode}">
+                <wem-navigator-menu preventRouting="true" slot="left" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-navigator-menu>
                 <div slot="center">${this.content}</div>
                 <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
-            </wem-main>
-            <wem-footer items="${this.footerItems}"></wem-footer>
+            </wem-navigator-main>
+            <wem-navigator-footer items="${this.footerItems}"></wem-navigator-footer>
         `;
     }  
 };

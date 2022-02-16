@@ -5,48 +5,8 @@ import { LitElement, html, css } from "lit";
  */
 class WEMMain extends LitElement {
     static styles = css`
-        * {
-            box-sizing: border-box;
-        }
-
-        aside {
-            background-color: #c28281;
-            color: white;
-            font-size: 24px;
-            text-align: center;
-        }
-        
-        section {
-            background-color: #6a9ebd;
-            color: white;
-            text-align: center;
-        }
-
-        /* FLEX */
-        main.flex {
-            display: flex;
+        main {
             height: 100%;
-        }
-        main.flex section {
-            flex-grow: 1;
-        }
-        main.flex aside {
-            min-width: 20%;
-        }
-        
-        /* GRID */
-        main.grid {
-            display: grid;
-            grid-template: 1fr / 1fr 3fr 1fr;
-        }
-        main.grid .left {
-            grid-column-start: 1;
-        }
-        main.grid section {
-            grid-column-start: 2;
-        }
-        main.grid .right {
-            grid-column-start: 3;
         }
     `;
     static properties = {
@@ -59,16 +19,14 @@ class WEMMain extends LitElement {
 
     render() {
         return html`
-            <main class="${this.styleMode}">
-                <aside class="left">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+            <main class="columns">
+                <aside class="column is-one-fifth">
                     <slot name="left"></slot>
                 </aside>
-                <section>
+                <section class="column">
                     <slot name="center"></slot>
                 </section>
-                <aside class="right">
-                    <slot name="right"></slot>
-                </aside>
             </main>
         `;
     }

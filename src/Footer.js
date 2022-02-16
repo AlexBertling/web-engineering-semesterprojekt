@@ -4,45 +4,16 @@ import { LitElement, html, css } from "lit";
  *
  */
 class WEMFooter extends LitElement {
-    static styles = css`
-        * {
-            box-sizing: border-box;
-        }
-
-        footer {
-            position: sticky;
-            background-color: black;
-            bottom: 0;
-            width: 100%;
-            padding-bottom: 10px;
-            color: white;
-            text-align: center;
-            font-size: 24px;
-        }
-        
-        footer a {
-            color: white;
-            font-size: 14px;
-            margin: 0 5px;
-        }
-    `;
-    static properties = {
-        items: {
-            converter: {
-                fromAttribute: (value, Array) => value ? value.split(",") : []
-            }
-        }
-    };
-
-    constructor() {
-        super();
-    }
 
     render() {
         return html`
-            <footer>
-                Footer: 
-                ${this.items.map(i => html`<a href="#">${i}</a>`)}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+            <footer class="footer pt-4 pb-4">
+                <div class="content has-text-centered">
+                    <p>
+                        Alexander Bertling © 2022
+                    </p>
+                </div>
             </footer>
         `;
     }

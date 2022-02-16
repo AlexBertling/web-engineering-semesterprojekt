@@ -1,9 +1,9 @@
-import WEMHeader from '../src/Header';
+import WEMHeader from '../src/NavigatorHeader';
 import { html } from 'lit';
-import { Horizontal } from './Menu.stories';
+import { Horizontal } from './NavigatorMenu.stories';
 
 export default {
-    title: 'WEM/Header',
+    title: 'WEM/NavigatorHeader',
     argTypes: {
         text: String,
         orientation: {
@@ -18,7 +18,7 @@ export default {
 };
 
 const TemplateEmpty = ({text}) => html`
-    <wem-header text="${text}"></wem-header>
+    <wem-navigator-header text="${text}"></wem-navigator-header>
 `;
 
 export const Empty = TemplateEmpty.bind({});
@@ -27,9 +27,9 @@ Empty.args = {
 }
 
 const TemplateWithMenu = ({text, orientation, items, menuClick}) => html`
-    <wem-header text="${text}">
-        <wem-menu orientation="${orientation}" items="${items}" @menuClick="${menuClick}"></wem-menu>
-    </wem-header>
+    <wem-navigator-header text="${text}">
+        <wem-navigator-menu orientation="${orientation}" items="${items}" @menuClick="${menuClick}"></wem-navigator-menu>
+    </wem-navigator-header>
 `;
 export const WithMenu = TemplateWithMenu.bind({});
 WithMenu.args = {
