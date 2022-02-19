@@ -91,9 +91,11 @@
         "lit-html/directives/ref.js": "./node_modules/lit-html/directives/ref.js",
         "lit/decorators/property.js": "./node_modules/lit/decorators/property.js",
         "lit-element/decorators.js": "./node_modules/lit-element/decorators.js",
+        "@highlightjs/cdn-assets/": "./node_modules/@highlightjs/cdn-assets/",
         "lit/directive-helpers.js": "./node_modules/lit/directive-helpers.js",
         "lit/directives/choose.js": "./node_modules/lit/directives/choose.js",
         "lit/directives/repeat.js": "./node_modules/lit/directives/repeat.js",
+        "@highlightjs/cdn-assets": "./node_modules/@highlightjs/cdn-assets/index",
         "lit/decorators/query.js": "./node_modules/lit/decorators/query.js",
         "lit/decorators/state.js": "./node_modules/lit/decorators/state.js",
         "lit/directives/cache.js": "./node_modules/lit/directives/cache.js",
@@ -119,28 +121,22 @@
         "path-to-regexp/": "./node_modules/path-to-regexp/",
         "@vaadin/router": "./node_modules/@vaadin/router/dist/vaadin-router.js",
         "path-to-regexp": "./node_modules/path-to-regexp/index.js",
+        "strip-indent": "./node_modules/strip-indent/index.js",
         "lit-element": "./node_modules/lit-element/index.js",
         "lit/html.js": "./node_modules/lit/html.js",
+        "min-indent/": "./node_modules/min-indent/",
+        "min-indent": "./node_modules/min-indent/index.js",
         "lit-html": "./node_modules/lit-html/lit-html.js",
         "lit": "./node_modules/lit/index.js"
       },
       "scopes": {}
     }
   </script>
-
-  <style>
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: sans-serif;
-      background-color: #ededed;
-    }
-  </style>
+  
   <title>wem-app</title>
 </head>
 
-<body>
+<body class="has-navbar-fixed-top">
   <wem-app stylemode="flex"></wem-app>
 
   <script type="module" src="src/App.js"></script>

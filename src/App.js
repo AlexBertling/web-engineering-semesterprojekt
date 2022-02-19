@@ -17,7 +17,7 @@ class WEMApp extends LitElement {
           box-sizing: border-box;
       } 
       .app-container {
-          height: 100vh;
+          height: calc(100vh - 52px);
           display: flex;
           flex-direction: column;
       }
