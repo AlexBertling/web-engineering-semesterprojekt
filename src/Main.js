@@ -20,14 +20,17 @@ class WEMMain extends LitElement {
     render() {
         return html`
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-            <main class="columns">
-                <aside class="column is-one-fifth">
-                    <slot name="left"></slot>
-                </aside>
-                <section class="column">
-                    <slot name="center"></slot>
-                </section>
-            </main>
+
+            <div class="container">
+                <main class="columns">
+                    <aside class="column is-one-fifth">
+                        <slot name="left"></slot>
+                    </aside>
+                    <section class="column">
+                        <slot name="center"></slot>
+                    </section>
+                </main>
+            </div>
         `;
     }
 }

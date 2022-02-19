@@ -31,7 +31,12 @@ class WEMApp extends LitElement {
       iframe {
           width: 100%;
           height: 100%;
-          min-height: 420px;
+          min-height: 50vh;
+      }
+      @media(min-width: 1024px) {
+          iframe {
+              min-height: 90vh;
+          }
       }
   `;
   static properties = {
@@ -91,7 +96,7 @@ class WEMApp extends LitElement {
         <div class="app-container">
           <wem-navbar baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-navbar>
           <wem-main styleMode="${this.styleMode}">
-              <wem-menu slot="left" baseUrl="${document.baseURI+this.nav1Selected+"/"}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}"></wem-menu>
+              <wem-menu slot="left" baseUrl="${document.baseURI+this.nav1Selected+"/"}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}" active="${this.nav2Selected}"></wem-menu>
               <div slot="center"><div id="routerOutlet"></div></div>
               <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
           </wem-main>
