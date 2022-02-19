@@ -4,9 +4,9 @@ import Main from "./Main.js"
 import Footer from "./Footer.js"
 import Menu from "./Menu.js"
 import Navbar from "./Navbar.js"
+import Section from "./Section.js"
 
 import Start from "./Start.js"
-import Navigator from "./Navigator.js"
 import { router } from "./Router.js"
 
 import { appConfig } from './appConfig.js';

@@ -7,9 +7,11 @@ const renderContent = async (context, commands) => {
             const entry = subject.filter(s => s.title == context.params.entry)[0];
             if (entry) {
                 if (entry.type == "text") {
-                    const stubElement = commands.component('div');
-                    stubElement.innerHTML = entry.title;
-                    return stubElement;
+                    const section = commands.component('wem-section');
+                    section.title = entry.title;
+                    section.subtitle = entry.subtitle || "";
+                    section.paragraphs = entry.paragraphs || [];
+                    return section;
                 } else if (entry.type == "component") {
                     //await import(document.baseURI + entry.url);
                     //console.log("import done");

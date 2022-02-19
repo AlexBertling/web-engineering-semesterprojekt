@@ -7,7 +7,21 @@ export const appConfig = {
         "HTTP-URI-HTML-CSS": [
             {
                 "title": "Erfolgsprinzipien des WWW",
-                "type": "text"
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Mit welchen fachlichen Argumenten wurde das WWW-Proposal von TBL abgelehnt?",
+                        "content": "- zu vage, Evolvierbarkeit falsch verstanden<br>- keine referentielle Integrität gesichert, also Broken Links möglich"
+                    },
+                    {
+                        "title": "Was sind die fachlichen Argumente, warum das WWW dennoch ein Erfolg wurde?",
+                        "content": "- Evolvierbarkeit: orthognoale Technologien können sich unabhängig voneinander, ohne zentralle Kontrolle, weiterentwickeln<br>- Offenheit: durch Verzicht auf referentielle Integrität ist das WWW ist beliebig erweiterbar"
+                    },
+                    {
+                        "title": "Was wäre der Preis für die garantierte Verhinderung von “broken links”?",
+                        "content": "- Zentrale Kontrolle<br>- Geschlossenheit"
+                    }
+                ]
             },
             {
                 "title": "HTTP",
