@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A51</title>
+</head>
+<body>
+    <div id="content"></div>
+
+    <script>
+
+        function fetchUrl(url){
+            return fetch(url).then(function(response){
+                return response.text();
+            });
+        }
+
+        const div = document.getElementById("content");
+
+        Promise.all([fetchUrl('./A.txt'), fetchUrl('./B.txt')])
+            .then(data => {
+                const txt1 = data[0].split("\n");
+                const txt2 = data[1].split("\n");
+
+                for(var i=0; i<txt1.length; i++){
+                    div.innerHTML += "" + txt1[i] + txt2[i] + "<br>";
+                }
+        });
+
+    </script>
+</body>
+</html>

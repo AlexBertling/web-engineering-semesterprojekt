@@ -46,9 +46,9 @@ class WEMSection extends LitElement {
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/default.min.css">
             <section class="section">
                 <h1 class="title">${this.title}</h1>
-                <h2 class="subtitle">
+                ${this.subtitle ? html`<h2 class="subtitle">
                     ${this.subtitle}&nbsp;
-                </h2>
+                </h2>`:""}
                 
                 <div class="content">
                     ${this.paragraphs.map(p => {
@@ -56,7 +56,7 @@ class WEMSection extends LitElement {
                         if (p.content) paragraph = unsafeHTML(p.content);
                         if (p.code) code = html`<pre>${unsafeHTML(hljs.highlight(stripIndent(p.code), {language: 'js'}).value)}</pre>`;     
                         return html`
-                            <h3>${unsafeHTML(p.title)}</h3>
+                            ${p.title ? html`<h3>${unsafeHTML(p.title)}</h3>` : ""}
                             <p>${paragraph}</p>
                             ${code}
                     `})}

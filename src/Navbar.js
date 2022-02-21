@@ -43,7 +43,7 @@ class WEMNavbar extends WEMMenu {
                     <div id="navbarBasicExample" class="navbar-menu ${this.mobileMenuActive ? 'is-active' : ''}">
                         <div class="navbar-start">
                             ${this.items.map((i) => html`
-                                <a class="navbar-item" href="${this.baseUrl+i}" @click="${this._dispatchClick}">${i}</a>
+                                <a class="navbar-item" href="${this.baseUrl+encodeURIComponent(i)}" @click="${this._dispatchClick}">${i}</a>
                             `)}
                         </div>
                     </div>

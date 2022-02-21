@@ -35,7 +35,7 @@ class WEMMenu extends LitElement {
             <aside class="menu">
                 <ul class="menu-list">
                     ${this.items.map((i) => html`
-                        <li><a class="${this.active == i ? "is-active" : ""}" href="${this.baseUrl+i}" @click="${this._dispatchClick}">${i}</a></li>
+                        <li><a class="${this.active == i ? "is-active" : ""}" href="${this.baseUrl+encodeURIComponent(i)}" @click="${this._dispatchClick}">${i}</a></li>
                     `)}
                 </ul>
             </aside>

@@ -226,7 +226,483 @@ export const appConfig = {
             {
                 "title": "Advanced Functional JavaScript Programming",
                 "type": "text", 
-                "paragraphs": []
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe 1",
+                        "content": "Make a function that makes a publish/subscribe object. It will reliably deliver all publications to all subscribers in the right order. <code><br>my_pubsub = pubsub(); <br>my_pubsub.subscribe(alert); <br>my_pubsub.publish(\"It works!\"); // alert(\"It works!\") </code>",
+                        "code": `
+                            const pubsub = () => {
+                                var functions = [];
+                                return {
+                                    subcribe: (f) => functions.push(f),
+                                    publish: (p) => functions.forEach(el => el(p))
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 2",
+                        "content": "Make a factory that makes functions that generate unique symbols. <code><br>gensym = gensymf('G'); <br>gensym() // 'G0' <br>gensym() // 'G1' <br>gensym() // 'G2' <br>gensym() // 'G3' <br></code>",
+                        "code": `
+                            const gensymf = (p) => {
+                                var pre = p, i=0;
+                                return function() {
+                                    return pre+i++;
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 3",
+                        "content": "Write a function that adds from many invocations, until it sees an empty invocation. <code><br>addg(3)(4)(5)() // 12 <br>addg(1)(2)(4)(8)() // 15 </code>",
+                        "code": `
+                            const addg = (function () {
+                                var sum = 0;
+                                function addToSum (x) {
+                                    if(x) { 
+                                        sum += x;
+                                        return addToSum;
+                                    } else {
+                                        let res = sum;
+                                        sum = 0;
+                                        return res;
+                                    }
+                                }
+                                return addToSum;
+                            })();`
+                    },
+                    {
+                        "title": "Aufgabe 4",
+                        "content": "Write a function that will take a binary function and apply it to many invocations. <code><br>applyg(add)(3)(4)(5)() // 12 <br>applyg(add)(1)(2)(4)(8)() // 15 </code></p>",
+                        "code": `
+                            const applyg = (f) => {
+                                var result = 0;
+                                function apply(x) {
+                                    if(x) {
+                                        result = f(result,x);
+                                        return apply;
+                                    } else {
+                                        let res = result;
+                                        result = 0;
+                                        return res;
+                                    }
+                                }
+                                return apply;
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 5",
+                        "content": "Write a function <code>m</code> that takes a value and an optional source string and returns them in an object. <code><br>JSON.stringify(m(1)) // {\"value\": 1, \"source\": \"1\"} <br>JSON.stringify(m(Math.PI, \"pi\")) // {\"value\": 3.14159..., \"source\": \"pi\"} </code>",
+                        "code": `
+                            const m = (v,s) => {
+                                if(!s) s = v;
+                                return {
+                                    "value": v,
+                                    "source": s
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 6",
+                        "content": "Write a function <code>addm</code> that takes two m objects and returns an <code>m</code> object. <code><br>JSON.stringify(addm(m(3), m(4))) // {\"value\": 7, \"source\": \"(3+4)\"} </code>",
+                        "code": `
+                            const addm = (m1,m2) => {
+                                return {
+                                    "value": m1.value+m2.value,
+                                    "source": "("+m1.source+"+"+m2.source+")"
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 7",
+                        "content": "Write a function <code>binarymf</code> that takes a binary function and a string and returns a function that acts on m objects. <code><br>addm = binarymf(add, \"+\"); <br>JSON.stringify(addm(m(3), m(4))) // {\"value\": 7, \"source\": \"(3+4)\"} </code>",
+                        "code": `
+                            const binarymf = (f,op) => {
+                                return function(m1,m2) {
+                                    return {
+                                        "value": f(m1.value, m2.value),
+                                        "source": "(" + m1.source + op + m2.source + ")"
+                                    }
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 8",
+                        "content": "Modify function <code>binarymf</code> so that the functions it produces can accept arguments that are either numbers or m objects. <code><br>addm = binarymf(add, \"+\"); <br>JSON.stringify(addm(3, 4)) // {\"value\": 7, \"source\": \"(3+4)\"} </code>",
+                        "code": `
+                            const binarymf = (f,op) => {
+                                return function(m1,m2) {
+                                    if(typeof m1 === "number") m1 = m(m1);
+                                    if(typeof m2 === "number") m2 = m(m2);
+                                    return {
+                                        "value": f(m1.value, m2.value),
+                                        "source": "(" + m1.source + op + m2.source + ")"
+                                    }
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 9",
+                        "content": "Write function <code>unarymf</code>, which is like <code>binarymf</code> except that it acts on unary functions. <code><br>squarem = unarymf(square, \"square\"); <br>JSON.stringify(squarem(4)) // {\"value\": 16, \"source\": \"(square 4)\"} </code>",
+                        "code": `
+                            const unarymf = (f,op) => {
+                                return function(m1) {
+                                    if(typeof m1 === "number") m1 = m(m1);
+                                    return {
+                                        "value": f(m1.value),
+                                        "source": "(" + op + " " + m1.value + ")"
+                                    }
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 10",
+                        "content": "Write a function that takes the lengths of two sides of a triangle and computes the length of the hypotenuse. (Hint: c2 = a2 + b2) <code><br>hyp(3, 4) // 5 </code>",
+                        "code": `
+                            const hyp = (a,b) => Math.sqrt(square(a)+square(b));`
+                    },
+                    {
+                        "title": "Aufgabe 11",
+                        "content": "Write a function that evaluates array expressions. <code><br>hypa = [ Math.sqrt, [ add, [mul, 3, 3], [mul, 4, 4] ] ]; <br>exp(hypa) // 5 </code>",
+                        "code": `
+                            const exp = (arr) => {
+                                if (arr.length == 2) { // unary
+                            
+                                    let arg = arr[1];
+                                    if(arg instanceof Array) arg = exp(arg);
+                                    return arr[0](arg);
+                            
+                                } else if (arr.length == 3) { // binary
+                            
+                                    let arg1 = arr[1];
+                                    let arg2 = arr[2];
+                                    if(arg1 instanceof Array) arg1 = exp(arg1);
+                                    if(arg2 instanceof Array) arg2 = exp(arg2);
+                                    return arr[0](arg1,arg2);
+                            
+                                }
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 12",
+                        "content": "Make a function that stores a value in a variable. <code><br>var variable; store(5); // variable === 5 </code>",
+                        "code": `
+                            const store = (x) => window[Object.keys(window).at(-1)] = x`
+                    },
+                    {
+                        "title": "Aufgabe 13",
+                        "content": "Make a function that takes a binary function, two functions that provide operands, and a function that takes the result. <code><br>quatre( add, identityf(3), identityf(4), store ); // variable === 7 </code>",
+                        "code": `
+                            const quatre = (f,op1,op2,s) => s(f(op1(),op2()));`
+                    },
+                    {
+                        "title": "Aufgabe 14",
+                        "content": "Make a function that takes a unary function, and returns a function that takes an argument and a callback. <code><br>sqrtc = unaryc(Math.sqrt); sqrtc(81, store) // variable === 9 </code>",
+                        "code": `
+                            const unaryc = (f) => {
+                                return (x,cb) => cb(f(x))
+                            }`
+                    },
+                    {
+                        "title": "Aufgabe 15",
+                        "content": "Make a function that takes a binary function, and returns a function that takes two arguments and a callback. <code><br>addc = binaryc(add); addc(4, 5, store) // variable === 9 <br>mulc = binaryc(mul); mulc(2, 3, store) // variable === 6 </code>",
+                        "code": `
+                            const binaryc = (f) => {
+                                return (op1,op2,cb) => cb(f(op1,op2))
+                            }`
+                    },
+                ]
+            }
+        ],
+        "DOM": [
+            {
+                "title": "Einkaufsliste",
+                "type": "html",
+                "url": "/assets/a41.html"
+            },
+            {
+                "title": "Rednerliste mit Zeitmessung",
+                "type": "html",
+                "url": "/assets/a42.html"
+            },
+            {
+                "title": "Tabellenkalkulation mit den Bordmitteln des Webs",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "TODO",
+                    }
+                ]
+            },
+            {
+                "title": "HTML-Editor",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "TODO",
+                    }
+                ]
+            },
+        ],
+        "Asynchron": [
+            {
+                "title": "Promises",
+                "type": "html",
+                "url": "/assets/a51.html"
+            },
+            {
+                "title": "async / await",
+                "type": "html",
+                "url": "/assets/a52.html"
+            },
+            {
+                "title": "Web Worker",
+                "type": "html",
+                "url": "/assets/a53.html"
+            },
+        ],
+        "SVG": [
+            {
+                "title": "Statistik-Balkendiagramm",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "TODO",
+                    }
+                ]
+            },
+            {
+                "title": "Bezier-Animation",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "TODO",
+                    }
+                ]
+            },
+            {
+                "title": "Kalligraphie-Editor",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "TODO",
+                    }
+                ]
+            },
+        ],
+        "Node & npm & Deno": [
+            {
+                "title": "File Generatoren",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe",
+                        "content": "Schreiben Sie in Node.js zwei Kommandozeilen-Tools, um große Dateien zu erzeugen.",
+                        "code": `
+                            node number_file_gen.js 20_000`
+                    },
+                    {
+                        "content": "soll eine Datei mit 20.000 Zeilen erzeugen. In jeder Zeile soll die Zeilennummer und ein Punkt stehen. 20.000 ist dabei ein Parameter des Tools. Jede andere Zahl soll ebenfalls erlaubt sein.",
+                        "code": `
+                            node alpha_file_gen.js 123456`
+                    },
+                    {
+                        "content": "soll eine Datei mit 123456 Zeilen erzeugen. In jeder Zeile soll eine Variation mit Wiederholung aller Großbuchstaben (ohne Umlaute) in folgender Reihenfolge stehen:",
+                        "code": `
+                            A
+                            B
+                            C
+                            ...
+                            Z
+                            AA
+                            AB
+                            AC
+                            AD
+                            ...`
+                    },
+                    {
+                        "content": "usw. Implementieren Sie Ihre Kommandozeilen-Tools in modernem ECMAScript 2021."
+                    },
+                    {
+                        "title": "Lösung",
+                        "content": "number_file_gen.js",
+                        "code": `
+                            const yargs = require("yargs");
+                            const fs = require("fs").promises;
+                            
+                            const number = yargs.argv._[0]
+                            
+                            if (!number) {
+                                console.log("Please provide a Number as First Parameter.");
+                                return;
+                            }
+                            
+                            const FILE = "number_file.txt";
+                            
+                            (async _=> {
+                                await fs.writeFile(FILE, "");
+                                for(let i=1; i<=number; i++) {
+                                    await fs.appendFile(FILE, i + ".\\n");
+                                }
+                            })();`
+                    },
+                    {
+                        "content": "alpha_file_gen.js",
+                        "code": `
+                            const yargs = require("yargs");
+                            const fs = require("fs").promises;
+
+                            const number = yargs.argv._[0]
+
+                            if (!number) {
+                                console.log("Please provide a Number as First Parameter.");
+                                return;
+                            }
+
+                            const FILE = "alpha_file.txt";
+
+                            (async _=> {
+                                await fs.writeFile(FILE, "");
+                                for(let i=1; i<=number; i++) {
+
+                                    let x = i, s = "";
+                                    do {
+                                        const n = Math.floor(x-1) % 26 + 65;
+                                        s = String.fromCharCode(n) + s;
+                                        x = (x-1) / 26;
+                                    } while (x >= 1);
+
+                                    await fs.appendFile(FILE, s + "\\n");
+                                }
+                            })();`
+                    }
+                ]
+            },
+            {
+                "title": "Performance Merge",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe",
+                        "content": "Schreiben Sie in Node.js zwei Programme merge_files.js und merge_streams.js, um große Dateien zu zeilenweise zusammenzuführen, merge_files.js mit fs.readFile und merge_streams.js mit Streams, also createReadFileStream und pipeline.",
+                        "code": `
+                            node merge_files.js big_file1.txt big_file2.txt
+                            node merge_streams.js big_file1.txt big_file2.txt
+                        `
+                    },
+                    {
+                        "content": "Implementieren Sie Ihre beiden Programme merge_files.js und merge_streams.js in modernem ECMAScript 2021. Messen Sie anschließend die Performanz beider Programme.",
+                    },
+                    {
+                        "content": "merge_files.js",
+                        "code": `
+                            const yargs = require("yargs");
+                            const fs = require("fs").promises;
+                            const { performance } = require('perf_hooks');
+                            
+                            const args = yargs.argv._
+                            
+                            if (args.length != 2) {
+                                console.log("Please provide two File Names as Parameters.");
+                                return;
+                            }
+                            
+                            const filename1 = args[0],
+                                filename2 = args[1];
+                            
+                            const FILE = "merge_file.txt";
+                            
+                            (async _=> {
+                            
+                                const startTime = performance.now();
+                            
+                                const [ text1, text2 ] = await Promise.all([
+                                    fs.readFile(filename1,'utf8'),
+                                    fs.readFile(filename2,'utf8'),
+                                    fs.writeFile(FILE, "")
+                                ]);
+                            
+                                const lines1 = text1.split("\\n");
+                                const lines2 = text2.split("\\n");
+                            
+                                let count = 0;
+                                for ( const line of lines1 ){
+                                    await fs.appendFile(FILE, line + lines2[count++] + "\\n");
+                                }
+                            
+                                const endTime = performance.now();
+                                console.log(\`Merge took \${(endTime - startTime).toFixed(2)} milliseconds\`);
+                            })();`
+                    },
+                    {
+                        "content": "merge_streams.js",
+                        "code": `
+                            const yargs = require("yargs");
+                            const fs = require("fs");
+                            const { pipeline } = require('stream/promises');
+                            const { performance } = require('perf_hooks');
+
+                            const args = yargs.argv._
+
+                            if (args.length != 2) {
+                                console.log("Please provide two File Names as Parameters.");
+                                return;
+                            }
+
+                            const filename1 = args[0],
+                                filename2 = args[1];
+
+                            const FILE = "merge_streams.txt";
+
+                            async function readFileStreamIntoArray(filename) {
+                                let lines = [];
+                                await pipeline(
+                                    fs.createReadStream(filename, "utf8"),
+                                    async function (source) {
+                                        source.setEncoding('utf8');
+                                        for await (const chunk of source) {
+                                            const chunkArr = chunk.split("\\n");
+                                            lines[lines.length-1] += chunkArr[0];
+                                            lines.push(...chunkArr.slice(1));
+                                        }
+                                    }
+                                );
+                                return lines;
+                            }
+
+                            async function run() {
+
+                                const startTime = performance.now();
+
+                                const lines1 = await readFileStreamIntoArray(filename1),
+                                    lines2 = await readFileStreamIntoArray(filename2);
+                                
+                                const writeStream = fs.createWriteStream(FILE);
+                                let count = 0;
+                                for ( const line of lines1 ){
+                                    await writeStream.write(line + lines2[count++] + "\\n");
+                                }
+                                
+                                const endTime = performance.now();
+                                console.log(\`Merge took \${(endTime - startTime).toFixed(2)} milliseconds\`);
+                            }
+                            run().catch(console.error);
+
+                            fs.writeFileSync(FILE, "");`
+                    },
+                    {
+                        "title": "Ergebnisse der Performanzmessung:",
+                        "content": `
+                            100000 Zeilen je Datei.<br>
+                            Merge_File: 53605.70ms<br>
+                            Merge_Streams: 185.02ms<br>
+                            <br>
+                            Streams sind extrem viel schneller.`
+                    }
+                ]
+            },
+            {
+                "title": "Merge Service",
+                "type": "html",
+                "url": "https://wem-merge-service.azurewebsites.net/index.html"
             }
         ],
         "Modular Web": [
