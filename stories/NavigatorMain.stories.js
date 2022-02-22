@@ -1,4 +1,4 @@
-import WEMMain from '../src/NavigatorMain';
+import WEMMain from '../src/components/NavigatorMain';
 import { html } from 'lit';
 import { Vertical } from './NavigatorMenu.stories';
 

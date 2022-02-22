@@ -1,4 +1,4 @@
-import WEMFooter from '../src/NavigatorFooter';
+import WEMFooter from '../src/components/NavigatorFooter';
 import { html } from 'lit';
 import { Horizontal } from './NavigatorMenu.stories';
 

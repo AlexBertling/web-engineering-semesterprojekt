@@ -1,5 +1,6 @@
-import Einkaufsliste from "./Einkaufsliste.js";
-import Rednerliste from "./Rednerliste.js";
+import Einkaufsliste from "./components/Einkaufsliste.js";
+import Rednerliste from "./components/Rednerliste.js";
+import Navigator from "./components/Navigator.js";
 
 export const appConfig = {
     "header": "Web Engineering Solution Navigator",
@@ -710,14 +711,24 @@ export const appConfig = {
             {
                 "title": "Einkaufsliste",
                 "type": "component",
-                "url":  "src/Einkaufsliste.js",
+                "url":  "src/components/Einkaufsliste.js",
                 "element": "wem-einkaufsliste"
             },
             {
                 "title": "Rednerliste",
                 "type": "component",
-                "url":  "src/Rednerliste.js",
+                "url":  "src/components/Rednerliste.js",
                 "element": "wem-rednerliste"
+            },
+            {
+                "title": "Navigator",
+                "type": "component",
+                "url":  "src/components/Navigator.js",
+                "element": "wem-navigator",
+                "attributes": {
+                    "styleMode": "grid",
+                    "dataUrl": "/assets/navigator.json"
+                }
             }
         ]
     }

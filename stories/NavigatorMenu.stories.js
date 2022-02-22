@@ -1,4 +1,4 @@
-import WEMMenu from '../src/NavigatorMenu';
+import WEMMenu from '../src/components/NavigatorMenu';
 import { html } from 'lit';
 
 export default {

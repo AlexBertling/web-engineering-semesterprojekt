@@ -1,4 +1,8 @@
 import { LitElement, html, css } from 'lit';
+import WEMHeader from './NavigatorHeader.js';
+import WEMMain from './NavigatorMain.js';
+import WEMFooter from './NavigatorFooter.js';
+import WEMMenu from './NavigatorMenu.js';
 
 /**
  * 
