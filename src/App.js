@@ -94,7 +94,7 @@ class WEMApp extends LitElement {
       console.log(document.baseURI+this.nav1Selected);
       return html`
         <div class="app-container">
-          <wem-navbar baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}"></wem-navbar>
+          <wem-navbar baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}" active="${this.nav1Selected}"></wem-navbar>
           <wem-main styleMode="${this.styleMode}">
               <wem-menu slot="left" baseUrl="${document.baseURI+this.nav1Selected+"/"}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}" active="${this.nav2Selected}"></wem-menu>
               <div slot="center"><div id="routerOutlet"></div></div>

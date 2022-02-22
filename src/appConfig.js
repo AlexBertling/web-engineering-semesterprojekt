@@ -592,6 +592,7 @@ export const appConfig = {
                         "content": "Implementieren Sie Ihre beiden Programme merge_files.js und merge_streams.js in modernem ECMAScript 2021. Messen Sie anschließend die Performanz beider Programme.",
                     },
                     {
+                        "title": "Lösung",
                         "content": "merge_files.js",
                         "code": `
                             const yargs = require("yargs");
