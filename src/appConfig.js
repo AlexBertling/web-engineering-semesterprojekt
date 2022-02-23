@@ -730,6 +730,63 @@ export const appConfig = {
                     "dataUrl": "/assets/navigator.json"
                 }
             }
+        ],
+        "PWA": [
+            {
+                "title": "Navigator-PWA",
+                "type": "text", 
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe",
+                        "content": "Wandeln Sie Ihren LitElement WWW-Navigator aus Aufgabe 8.3 in eine Progressive Web App um. ",
+                    },
+                    {
+                        "title": "Implementierung",
+                        "content": `<a target="_blank" href="https://wem-navigator-pwa.netlify.app/">Link zur PWA</a>`
+                    },
+                    {
+                        "title": "Vorgehen",
+                        "content": `
+                            - Manifest.json<br>
+                            - ServiceWorker für Offline-Funktionalität<br>
+                            - Komponenten mit <code>&lt;script type=&quot;module&quot;&gt;</code> laden
+                        `
+                    },
+                    {
+                        "title": "Probleme & Lösungskonzepte",
+                        "content": `
+                            - HTTPS erforderlich --> mkcert<br>
+                            - es fehlten immer wieder URLs beim Caching --> Kumulatives Caching, d.h. URLs. die nicht in Liste enthalten, werden trotzdem gecacht<br>
+                            - Mehrere Meta-Tags fehlten bei Lighthouse-Test --> wie beschrieben hinzufügen<br>
+                            - Alte ServiceWorker Versionen arbeiten weiter --> Unsubscribe in DevTools
+                        `
+                    }, 
+                    {
+                        "title": "Messergebnisse",
+                        "content": `<iframe src="https://wem-navigator-pwa.netlify.app/report.html" style="width:100%; height: 500px">`
+                    }
+                ]
+            }
+        ],
+        "Vue": [
+            {
+                "title": "Navigator",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe", 
+                        "content": "Schreiben Sie Ihren WWW-Navigator als SPA in Vue.js (optional: mit <a target=\"_blank\" href=\"https://router.vuejs.org/guide/\" rel=\"noopener\">Vue Router</a> und/oder mit <a target=\"_blank\" href=\"https://vuex.vuejs.org/\" rel=\"noopener\">Vuex</a> als State Manager)."
+                    },
+                    {
+                        "title": "Implementierung",
+                        "content": `<a target="_blank" href="https://wem-vue-navigator.netlify.app/">Link zur Anwendung</a>`
+                    },
+                    {
+                        "title": "Entscheidungen",
+                        "content": "wie W3C-App, also Navigator, Header, Menu, Main, Footer, State-Management ohne Vuex"
+                    }
+                ]
+            }
         ]
     }
 }
