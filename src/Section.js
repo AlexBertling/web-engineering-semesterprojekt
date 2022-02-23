@@ -54,7 +54,7 @@ class WEMSection extends LitElement {
                     ${this.paragraphs.map(p => {
                         let paragraph, code;
                         if (p.content) paragraph = unsafeHTML(p.content);
-                        if (p.code) code = html`<pre>${unsafeHTML(hljs.highlight(stripIndent(p.code), {language: 'js'}).value)}</pre>`;     
+                        if (p.code) code = html`<pre>${unsafeHTML(hljs.highlight(stripIndent(p.code), {language: p.codeType || 'js'}).value)}</pre>`;     
                         return html`
                             ${p.title ? html`<h3>${unsafeHTML(p.title)}</h3>` : ""}
                             <p>${paragraph}</p>

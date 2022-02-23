@@ -497,16 +497,19 @@ export const appConfig = {
                     {
                         "title": "Aufgabe",
                         "content": "Schreiben Sie in Node.js zwei Kommandozeilen-Tools, um große Dateien zu erzeugen.",
+                        "codeType": "shell",
                         "code": `
                             node number_file_gen.js 20_000`
                     },
                     {
                         "content": "soll eine Datei mit 20.000 Zeilen erzeugen. In jeder Zeile soll die Zeilennummer und ein Punkt stehen. 20.000 ist dabei ein Parameter des Tools. Jede andere Zahl soll ebenfalls erlaubt sein.",
+                        "codeType": "shell",
                         "code": `
                             node alpha_file_gen.js 123456`
                     },
                     {
                         "content": "soll eine Datei mit 123456 Zeilen erzeugen. In jeder Zeile soll eine Variation mit Wiederholung aller Großbuchstaben (ohne Umlaute) in folgender Reihenfolge stehen:",
+                        "codeType": "shell",
                         "code": `
                             A
                             B
@@ -584,6 +587,7 @@ export const appConfig = {
                     {
                         "title": "Aufgabe",
                         "content": "Schreiben Sie in Node.js zwei Programme merge_files.js und merge_streams.js, um große Dateien zu zeilenweise zusammenzuführen, merge_files.js mit fs.readFile und merge_streams.js mit Streams, also createReadFileStream und pipeline.",
+                        "codeType": "shell",
                         "code": `
                             node merge_files.js big_file1.txt big_file2.txt
                             node merge_streams.js big_file1.txt big_file2.txt
@@ -1030,6 +1034,7 @@ export const appConfig = {
                     },
                     {
                         "title": "C-Code für Primzahlalgorithmus",
+                        "codeType": "c",
                         "code": `
                             int genPrimes(int n) {
 
