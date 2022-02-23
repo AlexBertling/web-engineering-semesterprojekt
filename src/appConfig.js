@@ -787,6 +787,303 @@ export const appConfig = {
                     }
                 ]
             }
+        ],
+        "WebAssembly": [
+            {
+                "title": "WebAssembly-Modul von Hand erstellen",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe",
+                        "content": `Erstellen Sie ein WebAssembly-Modul für den <a target="_blank" href="https://de.wikipedia.org/wiki/Gr%C3%B6%C3%9Fter_gemeinsamer_Teiler" rel="noopener">größten gemeinsamen Teiler</a> von Hand in <a target="_blank" href="https://webassembly.github.io/spec/core/text/index.html" rel="noopener">WAT</a>, kompilieren Sie diesen mit wat2wasm nach WASM und testen Sie Ihr Modul durch Aufruf mit Parametern aus dem Bereich von 1 bis 100.`
+                    },
+                    {
+                        "title": "Lösung",
+                        "content": `WAT-Code für ggT <code>ggT( x: i32, y: i32 ): i32</code>:`,
+                        "code": `
+                           (module
+                            (table 0 anyfunc)
+                            (memory $0 1)
+                            (export "memory" (memory $0))
+                            (export "ggT" (func $ggT))
+                            (func $ggT (; 0 ;) (param $0 i32) (param $1 i32) (result i32)
+                             (local $2 i32)
+                             (set_local $2
+                              (i32.const 0)
+                             )
+                             (block $label$0
+                              (br_if $label$0
+                               (i32.eqz
+                                (get_local $0)
+                               )
+                              )
+                              (br_if $label$0
+                               (i32.eqz
+                                (get_local $1)
+                               )
+                              )
+                              (loop $label$1
+                               (set_local $1
+                                (i32.rem_s
+                                 (get_local $0)
+                                 (tee_local $2
+                                  (get_local $1)
+                                 )
+                                )
+                               )
+                               (set_local $0
+                                (get_local $2)
+                               )
+                               (br_if $label$1
+                                (i32.gt_s
+                                 (get_local $1)
+                                 (i32.const 0)
+                                )
+                               )
+                              )
+                             )
+                             (get_local $2)
+                            )
+                           )`
+                    },
+                    {
+                        "content": `Code für den Test mit allen Zahlen von 1 bis 100`,
+                        "code": `
+                            var wasmModule = new WebAssembly.Module(wasmCode);
+                            var wasmInstance = new WebAssembly.Instance(wasmModule, wasmImports);
+
+                            for (let i=1; i<=100; i++) {
+                                for (let j=1; j<=100; j++) {
+                                    log("ggT("+i+","+j+") = " + wasmInstance.exports.ggT(i,j));    
+                                }
+                            }`
+                    }
+                ]
+            },
+            {
+                "title": "Performanz-Messungen und -Vergleich",
+                "type": "text",
+                "paragraphs": [
+                    {
+                        "title": "Aufgabe",
+                        "content": "Berechnen Sie, wie viele Primzahlen es bis 100.000 gibt. Implementieren Sie Ihren Algorithmus sowohl in JavaScript als auch in WebAssembly. Vergleichen Sie die Performanz beider Implementierungen."
+                    },
+                    {
+                        "title": "Lösung",
+                        "content": "Anzahl Primzahlen bis 100000: 9592"
+                    },
+                    {
+                        "title": "JS-Code für Primzahl-Algorithmus",
+                        "code": `
+                            const yargs = require("yargs");
+
+                            const N = yargs.argv._[0];
+                            
+                            if (!N) {
+                                console.log("Please provide a Number as First Parameter.");
+                                return;
+                            }
+                            
+                            function* genPrime() {
+                            
+                                for (var i = 2; ; i++) {
+                                    if (isPrime(i)) {
+                                        yield i;
+                                    }
+                                }
+                            }
+                            
+                            function isPrime(num) {
+                                for (var i = 2; i < num; i++) {
+                                    if (num % i === 0) {
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+                            
+                            const primeGenerator = genPrime(N);
+                            
+                            const label = "JS-Calculation";
+                            console.time(label);
+                            
+                            let primes = 0;
+                            while(true) {
+                                const p = primeGenerator.next().value;
+                                if (p < N) primes++;
+                                else break;
+                            } 
+                            console.timeEnd(label);
+                            
+                            console.log(primes);
+                        `
+                    },
+                    {
+                        "title": "WAT-Code für Primzahl-Algorithmus",
+                        "code": `
+                           (module
+                            (table 0 anyfunc)
+                            (memory $0 1)
+                            (export "memory" (memory $0))
+                            (export "genPrimes" (func $genPrimes))
+                            (func $genPrimes (; 0 ;) (param $0 i32) (result i32)
+                             (local $1 i32)
+                             (local $2 i32)
+                             (local $3 i32)
+                             (local $4 i32)
+                             (local $5 i32)
+                             (block $label$0
+                              (br_if $label$0
+                               (i32.lt_s
+                                (get_local $0)
+                                (i32.const 1)
+                               )
+                              )
+                              (set_local $1
+                               (i32.const 0)
+                              )
+                              (set_local $2
+                               (i32.const 2)
+                              )
+                              (set_local $3
+                               (i32.const 0)
+                              )
+                              (loop $label$1
+                               (set_local $5
+                                (i32.const 1)
+                               )
+                               (block $label$2
+                                (br_if $label$2
+                                 (i32.lt_s
+                                  (get_local $2)
+                                  (i32.const 3)
+                                 )
+                                )
+                                (set_local $5
+                                 (i32.const 1)
+                                )
+                                (set_local $4
+                                 (i32.const 0)
+                                )
+                                (loop $label$3
+                                 (set_local $5
+                                  (select
+                                   (get_local $5)
+                                   (i32.const 0)
+                                   (i32.rem_s
+                                    (get_local $2)
+                                    (i32.add
+                                     (get_local $4)
+                                     (i32.const 2)
+                                    )
+                                   )
+                                  )
+                                 )
+                                 (br_if $label$3
+                                  (i32.ne
+                                   (get_local $1)
+                                   (tee_local $4
+                                    (i32.add
+                                     (get_local $4)
+                                     (i32.const 1)
+                                    )
+                                   )
+                                  )
+                                 )
+                                )
+                               )
+                               (set_local $1
+                                (i32.add
+                                 (get_local $1)
+                                 (i32.const 1)
+                                )
+                               )
+                               (set_local $2
+                                (i32.add
+                                 (get_local $2)
+                                 (i32.const 1)
+                                )
+                               )
+                               (br_if $label$1
+                                (i32.lt_s
+                                 (tee_local $3
+                                  (i32.add
+                                   (get_local $3)
+                                   (i32.ne
+                                    (get_local $5)
+                                    (i32.const 0)
+                                   )
+                                  )
+                                 )
+                                 (get_local $0)
+                                )
+                               )
+                              )
+                              (return
+                               (get_local $2)
+                              )
+                             )
+                             (i32.const 2)
+                            )
+                           )                           
+                        `
+                    },
+                    {
+                        "title": "C-Code für Primzahlalgorithmus",
+                        "code": `
+                            int genPrimes(int n) {
+
+                                int lastPrime;
+                            
+                                int i, x = 0;
+                                for (i=2; i<n; i++) {
+                            
+                                    int isPrime = 1;
+                                    for (int j = 2; j < i; j++) {
+                                        if (i % j == 0) {
+                                            isPrime = 0;
+                                            break;
+                                        }
+                                    }
+                            
+                                    if (isPrime) {
+                                        lastPrime = i;
+                                        x++;
+                                    }
+                                }
+                            
+                                return x;
+                            }`
+                    },
+                    {
+                        "title": "Benchmark-Code",
+                        "code": `
+                            const webassembly = require("webassembly");
+                            const yargs = require("yargs");
+                            
+                            const N = yargs.argv._[0];
+                            
+                            if (!N) {
+                                console.log("Please provide a Number as First Parameter.");
+                                return;
+                            }
+                            
+                            webassembly
+                                .load("./a11-2.wasm")
+                                .then( module => {
+                                    const label = "WASM-Calculation";
+                                    console.time(label);
+                                    console.log(module.exports.genPrimes(N));
+                                    console.timeEnd(label);
+                                })
+                        `
+                    },
+                    {
+                        "title": "Messergebnisse",
+                        "content": "Min, Max, Avg, statistische Analyse, Erklärung der Unterschiede"
+                    }
+                ]
+            }
         ]
     }
 }

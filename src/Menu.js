@@ -4,7 +4,12 @@ import { LitElement, html, css } from "lit";
  *
  */
 class WEMMenu extends LitElement {
-    static styles = css``;
+    static styles = css`
+        aside.menu {
+            position: sticky;
+            top: 52px;
+        }
+    `;
     
     static properties = {
         active: {type: String},
