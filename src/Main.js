@@ -10,7 +10,8 @@ class WEMMain extends LitElement {
         }
     `;
     static properties = {
-        styleMode: {type: String}
+        styleMode: {type: String},
+        hideLeft: {type: String}
     };
 
     constructor() {
@@ -23,7 +24,7 @@ class WEMMain extends LitElement {
 
             <div class="container">
                 <main class="columns">
-                    <aside class="column is-one-fifth">
+                    <aside class="column is-one-fifth ${this.hideLeft == "true" ? 'is-hidden': ''}">
                         <slot name="left"></slot>
                     </aside>
                     <section class="column">

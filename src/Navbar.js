@@ -1,5 +1,6 @@
 import { LitElement, html, css } from "lit";
 import WEMMenu from "./Menu.js";
+import { router } from "./Router.js"
 
 /**
  *
@@ -17,13 +18,11 @@ class WEMNavbar extends WEMMenu {
     }
 
     _dispatchClick(e) {
-        super._dispatchClick(e);
         this.mobileMenuActive = false;
     }
 
     render() {
         return html`
-            <!--<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">-->
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
             
             <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation">
@@ -42,9 +41,11 @@ class WEMNavbar extends WEMMenu {
 
                     <div id="navbarBasicExample" class="navbar-menu ${this.mobileMenuActive ? 'is-active' : ''}">
                         <div class="navbar-start">
-                            ${this.items.map((i) => html`
-                                <a class="navbar-item is-tab ${this.active == i ? "is-active" : ""}" href="${this.baseUrl+encodeURIComponent(i)}" @click="${this._dispatchClick}">${i}</a>
-                            `)}
+                            ${this.items.map((i) => {
+                                const url = router.urlForPath(encodeURIComponent(i));
+                                return html`
+                                <a class="navbar-item is-tab ${router.location.params.subject == i ? "is-active" : ""}" href="${url}" @click="${this._dispatchClick}">${i}</a>
+                            `})}
                         </div>
                     </div>
                 </div>

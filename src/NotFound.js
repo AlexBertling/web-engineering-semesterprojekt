@@ -1,17 +1,21 @@
 import { LitElement, html, css } from 'lit';
 
-class WEMStart extends LitElement {
+class WEMNotFound extends LitElement {
+
+    static properties = {
+        location: { type: Object },
+    }
 
     render() {
         return html`
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-            <section class="hero is-info is-medium">
+            <section class="hero is-info is-warning">
                 <div class="hero-body">
                     <p class="title">
-                        Web Engineering Semesterprojekt
+                        Seite nicht gefunden.
                     </p>
                     <p class="subtitle">
-                        Alexander Bertling im WS 2022
+                        Eine Seite mit dieser URL existiert leider nicht.
                     </p>
                 </div>
             </section>
@@ -20,6 +24,6 @@ class WEMStart extends LitElement {
 
 }
 
-export default WEMStart;
+export default WEMNotFound;
 
-customElements.define("wem-start", WEMStart);
+customElements.define("wem-not-found", WEMNotFound);

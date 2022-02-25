@@ -38,14 +38,10 @@ const routes = [
         animate: true, 
         children: [
             { path: "/", component: "wem-start" },
-            { path: "/:subject", 
-                children: [
-                    { 
-                        path: "/:entry", 
-                        action: renderContent
-                    }
-                ]
-            },
+            { path: "/:subject", component: "wem-start" },
+            { path: "/:subject/:entry", action: renderContent },
+                
+            {path: '(.*)', component: 'wem-not-found'}
         ]
     }
 ];

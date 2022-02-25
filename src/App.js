@@ -1,69 +1,80 @@
-import { LitElement, html, css } from 'lit';
+import { LitElement, html, css } from "lit";
 
-import Main from "./Main.js"
-import Footer from "./Footer.js"
-import Menu from "./Menu.js"
-import Navbar from "./Navbar.js"
-import Section from "./Section.js"
+import Main from "./Main.js";
+import Footer from "./Footer.js";
+import Menu from "./Menu.js";
+import Navbar from "./Navbar.js";
+import Section from "./Section.js";
 
-import Start from "./Start.js"
-import { router } from "./Router.js"
+import Start from "./Start.js";
+import NotFound from "./NotFound.js";
+import { router } from "./Router.js";
 
-import { appConfig } from './appConfig.js';
+import { appConfig } from "./appConfig.js";
 
 class WEMApp extends LitElement {
   static styles = css`
-      * {
-          box-sizing: border-box;
-      } 
-      .app-container {
-          height: calc(100vh - 52px);
-          display: flex;
-          flex-direction: column;
-      }
-      wem-main {
-          flex-grow: 1;
-      }
-      div[slot=center],
-      #routerOutlet {
-          height: 100%;
-      }
+    * {
+      box-sizing: border-box;
+    }
+    .app-container {
+      height: calc(100vh - 52px);
+      display: flex;
+      flex-direction: column;
+    }
+    wem-main {
+      flex-grow: 1;
+    }
+    div[slot="center"],
+    #routerOutlet {
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 50vh;
+    }
+    @media (min-width: 1024px) {
       iframe {
-          width: 100%;
-          height: 100%;
-          min-height: 50vh;
+        min-height: 90vh;
       }
-      @media(min-width: 1024px) {
-          iframe {
-              min-height: 90vh;
-          }
-      }
+    }
   `;
   static properties = {
-      styleMode: {type: String},
-      data: {},
-      nav1: {type: Array},
-      nav2: {type: Array},
-      nav1Selected: {type: String},
-      nav2Selected: {type: String},
-      content: {type: String},
-      references: {type: Array},
-      //dataUrl: {type: String}
-  }
+    styleMode: { type: String },
+    data: {},
+    nav1: { type: Array },
+    nav2: { type: Array },
+    nav1Selected: { type: String },
+    nav2Selected: { type: String },
+    content: { type: String },
+    references: { type: Array },
+  };
 
   constructor() {
-      super();
-      this.nav1 = [];//["Home, News, Contact, About"];
-      this.nav2 = [];//["Item1", "Item2", "Item3"];
-      this.content = "";
-      this.references = [];
-      this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
-      this.applyAppConfig();
+    super();
+    this.nav1 = []; //["Home, News, Contact, About"];
+    this.nav2 = []; //["Item1", "Item2", "Item3"];
+    this.content = "";
+    this.references = [];
+    this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
+    this.applyAppConfig();
+    window.addEventListener("vaadin-router-location-changed", (event) => {
+      // nicht schön, aber Rerender sonst nicht möglich
+      this.nav1Selected = event.detail.location.params.subject;
+      if (this.nav1Selected) {
+        this.nav2 = this.data.menu[this.nav1Selected].map((el) => el.title);
+      } else {
+        this.nav2Selected = null;
+        this.nav2 = [];
+      }
+      this.nav2Selected = event.detail.location.params[1];
+      this.requestUpdate();
+    });
   }
 
-  firstUpdated(){
-    //const router = new Router(this.shadowRoot?.querySelector('#routerOutlet'));
-    router.setOutlet(this.shadowRoot?.querySelector('#routerOutlet'));
+  firstUpdated() {
+    router.setOutlet(this.shadowRoot?.querySelector("#routerOutlet"));
   }
 
   applyAppConfig() {
@@ -72,39 +83,39 @@ class WEMApp extends LitElement {
     this.nav2 = [];
     this.data = appConfig;
     router.setAppConfig(appConfig);
-    }
-
-  _handleMenu1Click(e){
-      console.log(e.detail);
-      this.nav1Selected = e.detail;
-      this.nav2 = this.data.menu[e.detail].map(el => el.title);
-      this.nav2Selected = null;
-      this.content = "";
-      this.references = [];
-  }
-
-  _handleMenu2Click(e){
-      console.log(e.detail);
-      this.nav2Selected = e.detail;
-      //this.content = this.data[this.nav1Selected][this.nav2Selected].content;
-      //this.references = this.data[this.nav1Selected][this.nav2Selected].references;
   }
 
   render() {
-      console.log(document.baseURI+this.nav1Selected);
-      return html`
-        <div class="app-container">
-          <wem-navbar baseUrl="${document.baseURI}" orientation="horizontal" items="${this.nav1}" @menuClick="${this._handleMenu1Click}" active="${this.nav1Selected}"></wem-navbar>
-          <wem-main styleMode="${this.styleMode}">
-              <wem-menu slot="left" baseUrl="${document.baseURI+this.nav1Selected+"/"}" orientation="vertical" items="${this.nav2}" @menuClick="${this._handleMenu2Click}" active="${this.nav2Selected}"></wem-menu>
-              <div slot="center"><div id="routerOutlet"></div></div>
-              <ul slot="right">${this.references.map(r => html`<li>${r}</li>`)}</ul>
-          </wem-main>
-          <wem-footer></wem-footer>
-        </div>
-      `;
-  }  
-};
+    console.log(document.baseURI + this.nav1Selected);
+    return html`
+      <div class="app-container">
+        <wem-navbar
+          baseUrl="${document.baseURI}"
+          orientation="horizontal"
+          items="${this.nav1}"
+          @menuClick="${this._handleMenu1Click}"
+        ></wem-navbar>
+        <wem-main
+          styleMode="${this.styleMode}"
+          hideLeft="${this.nav1Selected ? false : true}"
+        >
+          <wem-menu
+            slot="left"
+            baseUrl="${"/" + this.nav1Selected}"
+            orientation="vertical"
+            items="${this.nav2}"
+            @menuClick="${this._handleMenu2Click}"
+          ></wem-menu>
+          <div slot="center"><div id="routerOutlet"></div></div>
+          <ul slot="right">
+            ${this.references.map((r) => html`<li>${r}</li>`)}
+          </ul>
+        </wem-main>
+        <wem-footer></wem-footer>
+      </div>
+    `;
+  }
+}
 
 export default WEMApp;
 
