@@ -34,11 +34,6 @@ class WEMApp extends LitElement {
       height: 100%;
       min-height: 50vh;
     }
-    @media (min-width: 1024px) {
-      iframe {
-        min-height: 90vh;
-      }
-    }
   `;
   static properties = {
     styleMode: { type: String },

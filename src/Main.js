@@ -5,7 +5,7 @@ import { LitElement, html, css } from "lit";
  */
 class WEMMain extends LitElement {
     static styles = css`
-        main {
+        .container, main {
             height: 100%;
         }
     `;
