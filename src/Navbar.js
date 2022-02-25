@@ -29,7 +29,7 @@ class WEMNavbar extends WEMMenu {
                 <div class="container">
                     <div class="navbar-brand">
                         <a class="navbar-item" href="/">
-                            <img src="https://git.inf.h-brs.de/uploads/-/system/appearance/logo/1/hbrs.svg" width="112" height="28">
+                            <img src="https://git.inf.h-brs.de/uploads/-/system/appearance/logo/1/hbrs.svg" width="112" height="28" alt="HBRS-Logo">
                         </a>
 
                         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" @click="${this._toggle}">
