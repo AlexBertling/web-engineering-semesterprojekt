@@ -2,6 +2,7 @@ import merge from 'deepmerge';
 // use createSpaConfig for bundling a Single Page App
 import { createSpaConfig } from '@open-wc/building-rollup';
 import copy from 'rollup-plugin-copy';
+import { rollupImportMapPlugin } from "rollup-plugin-import-map";
 
 // use createBasicConfig to do regular JS to JS bundling
 // import { createBasicConfig } from '@open-wc/building-rollup';
@@ -19,6 +20,9 @@ const baseConfig = createSpaConfig({
 
   // set to true to inject the service worker registration into your index.html
   injectServiceWorker: false,
+
+  // resolve all externals with import-map
+  nodeResolve: false
 });
 
 export default merge(baseConfig, {
@@ -39,5 +43,6 @@ export default merge(baseConfig, {
       // set flatten to false to preserve folder structure
       flatten: false,
     }),
+    rollupImportMapPlugin('./project.importmap')
   ],
 });

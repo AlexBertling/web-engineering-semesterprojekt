@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
-import hljs from '@highlightjs/cdn-assets/es/highlight.min.js';
+import hljs from 'highlight.js';
 
 const minIndent = string => {
 	const match = string.match(/^[ \t]*(?=\S)/gm);
