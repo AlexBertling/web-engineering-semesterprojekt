@@ -7,13 +7,16 @@
   <meta name="Description" content="Put your description here.">
   <base href="/">
 
+  <link rel="manifest" href="/assets/manifest.json">
+  <meta name="theme-color" content="#3e8ed0"/>
+
   <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <title>Web Engineering Semesterprojekt</title>
 </head>
 
-<body class="has-navbar-fixed-top">
+<body class="has-navbar-fixed-top" style="overflow-x: hidden">
   <wem-app stylemode="flex"></wem-app>
 
   <script type="module" src="src/App.js"></script>
