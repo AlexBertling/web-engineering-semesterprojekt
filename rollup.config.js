@@ -22,7 +22,13 @@ const baseConfig = createSpaConfig({
   injectServiceWorker: true,
 
   // resolve all externals with import-map
-  nodeResolve: false
+  nodeResolve: false,
+
+  // customize workbox config
+  workbox: {
+    // cache anything in outputDir
+    globPatterns: ['**/*'],
+  }
 });
 
 export default merge(baseConfig, {
