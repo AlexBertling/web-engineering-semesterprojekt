@@ -22,10 +22,19 @@ const renderContent = async (context, commands) => {
                     }
                     return c;
                 } else if (entry.type == "html") {
+                    const section = commands.component('wem-section');
+                    section.title = entry.title;
+                    section.subtitle = entry.subtitle || "";
                     const iframe = commands.component("iframe");
                     iframe.src = entry.url;
                     iframe.frameBorder = "0";
-                    return iframe;
+                    section.element = iframe;
+                    section.paragraphs = [
+                        {
+                            "content": `<a target="_blank" href="${entry.url}">Link zur Seite</a>`
+                        }
+                    ]
+                    return section;
                 }
             }
         }

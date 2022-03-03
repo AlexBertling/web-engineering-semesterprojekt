@@ -8,7 +8,7 @@ class WEMMenu extends LitElement {
     static styles = css`
         aside.menu {
             position: sticky;
-            top: 52px;
+            top: 15px;
         }
     `;
     

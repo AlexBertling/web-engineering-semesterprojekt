@@ -29,10 +29,20 @@ const stripIndent = string => {
  *
  */
 class WEMSection extends LitElement {
+
+    static styles = css`
+        iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 50vh;
+        }
+    `
+
     static properties = {
         title: {type: String},
         subtitle: {type: String},
-        paragraphs: {type: Array}
+        paragraphs: {type: Array},
+        element: {type: Object}
     }
 
     constructor() {
@@ -60,6 +70,7 @@ class WEMSection extends LitElement {
                             <p>${paragraph}</p>
                             ${code}
                     `})}
+                    ${this.element}
                     
                 </div>
             </section>
