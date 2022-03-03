@@ -27,7 +27,7 @@ const baseConfig = createSpaConfig({
   // customize workbox config
   workbox: {
     // cache anything in outputDir
-    globPatterns: ['**/*'],
+    globPatterns: ['**/*.{html,js,css,webmanifest,txt,png,json}'],
   }
 });
 
