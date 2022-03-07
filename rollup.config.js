@@ -52,6 +52,7 @@ export default merge(baseConfig, {
         { src: 'assets/**/*', dest: './dist/assets' },
         { src: "_redirects", dest: "./dist"},
         { src: "favicon.ico", dest: "./dist"},
+        { src: "manifest.json", dest: "./dist"},
       ],
       // set flatten to false to preserve folder structure
       flatten: false,

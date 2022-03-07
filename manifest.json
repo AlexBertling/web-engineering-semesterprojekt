@@ -1,7 +1,7 @@
 {
     "name": "Web Engineering Semesterprojekt",
     "short_name": "WEM-Projekt",
-    "start_url": "index.html",
+    "start_url": "",
     "icons": [
         {
             "src": "./icon-192x192.png",
