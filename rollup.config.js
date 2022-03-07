@@ -33,8 +33,8 @@ const baseConfig = createSpaConfig({
     ]*/
     runtimeCaching: [
       {
-        urlPattern: "/",
-        handler: 'CacheFirst',
+        urlPattern: new RegExp('.*unpkg.*'),
+        handler: 'StaleWhileRevalidate',
       },
     ],
   }
