@@ -1,7 +1,7 @@
 {
     "name": "Web Engineering Semesterprojekt",
     "short_name": "WEM-Projekt",
-    "start_url": "",
+    "start_url": "https://web-engineering-semesterprojekt.netlify.app",
     "icons": [
         {
             "src": "./icon-192x192.png",
