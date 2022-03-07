@@ -1,6 +1,6 @@
 {
   "imports": {
-    "lit": "https://www.unpkg.com/lit@2.2.0/index.js?module",
+    "lit": "https://unpkg.com/lit@2.2.0/index.js?module",
     "lit/directives/unsafe-html.js": "https://unpkg.com/lit-html@2.2.0/directives/unsafe-html.js?module",
     "@vaadin/router": "https://unpkg.com/@vaadin/router@1.7.4/dist/vaadin-router.js?module",
     "highlight.js": "https://unpkg.com/@highlightjs/cdn-assets@11.4.0/es/highlight.min.js?module"
