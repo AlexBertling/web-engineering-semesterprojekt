@@ -27,10 +27,7 @@ const baseConfig = createSpaConfig({
   // customize workbox config
   workbox: {
     // cache anything in outputDir
-    globPatterns: ['**/*.{html,js,css,webmanifest,txt,png,json}'],
-    /*importScripts: [
-      "sw_addon.js"
-    ]*/
+    globPatterns: ['**/*.{html,js,css,webmanifest,txt,png,json,svg}'],
     runtimeCaching: [
       {
         urlPattern: new RegExp('.*unpkg.*'),
@@ -55,7 +52,6 @@ export default merge(baseConfig, {
         { src: 'assets/**/*', dest: './dist/assets' },
         { src: "_redirects", dest: "./dist"},
         { src: "favicon.ico", dest: "./dist"},
-        { src: "sw_addon.js", dest: "./dist"},
       ],
       // set flatten to false to preserve folder structure
       flatten: false,
