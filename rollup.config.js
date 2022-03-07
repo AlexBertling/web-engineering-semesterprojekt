@@ -44,7 +44,8 @@ export default merge(baseConfig, {
     copy({
       targets: [
         { src: 'assets/**/*', dest: './dist/assets' },
-        { src: "_redirects", dest: "./dist"}
+        { src: "_redirects", dest: "./dist"},
+        { src: "favicon.ico", dest: "./dist"}
       ],
       // set flatten to false to preserve folder structure
       flatten: false,
