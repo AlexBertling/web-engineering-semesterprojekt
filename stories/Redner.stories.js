@@ -2,10 +2,10 @@ import Redner from '../src/components/Redner';
 import { html } from 'lit';
 
 export default {
-  title: 'WEM/Redner'
+  title: 'Components/Redner'
 };
 
-export const Empty = () => 
+export const Default = () => 
     html`
         <wem-redner name="Max Mustermann"></wem-redner>
     `;

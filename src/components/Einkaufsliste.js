@@ -16,7 +16,11 @@ class Einkaufsliste extends LitElement {
         }
     `;
     static properties = {
-        list: {}
+        list: {
+            converter: {
+                fromAttribute: (value, Array) => value ? value.split(",") : []
+            }
+        },
     }
 
     constructor(onAddItem) {

@@ -59,6 +59,11 @@ class Timer {
         this.onTimerStart = onTimerStart;
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        this.startTimer();
+    }
+
     startTimer() {
         //this.rednerList?.stopAllTimers();
         this.timer.start();

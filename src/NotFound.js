@@ -2,10 +2,6 @@ import { LitElement, html, css } from 'lit';
 
 class WEMNotFound extends LitElement {
 
-    static properties = {
-        location: { type: Object },
-    }
-
     render() {
         return html`
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">

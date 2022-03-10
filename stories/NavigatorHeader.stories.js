@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { Horizontal } from './NavigatorMenu.stories';
 
 export default {
-    title: 'WEM/NavigatorHeader',
+    title: 'Components/NavigatorHeader',
     argTypes: {
         text: String,
         orientation: {

@@ -1,13 +1,16 @@
 import WEMFooter from '../src/Footer';
 import { html } from 'lit';
-import { Horizontal } from './Menu.stories';
 
 export default {
-    title: 'WEM/Footer',
+    title: 'Solution Navigator/Footer',
+    content: String
 };
 
-const Template = ({items}) => html`
-    <wem-footer></wem-header>
+const Template = ({content}) => html`
+    <wem-footer content="${content}"></wem-footer>
 `;
 
-export const Empty = Template.bind({});
+export const Default = Template.bind({});
+Default.args = {
+    content: "Alexander Bertling © 2022"
+}

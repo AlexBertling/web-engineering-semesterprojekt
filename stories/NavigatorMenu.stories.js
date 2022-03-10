@@ -2,7 +2,7 @@ import WEMMenu from '../src/components/NavigatorMenu';
 import { html } from 'lit';
 
 export default {
-    title: 'WEM/NavigatorMenu',
+    title: 'Components/NavigatorMenu',
     argTypes: {
         preventRouting: {type: "boolean"},
         orientation: {

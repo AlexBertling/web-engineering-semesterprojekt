@@ -10,7 +10,6 @@ class WEMMain extends LitElement {
         }
     `;
     static properties = {
-        styleMode: {type: String},
         hideLeft: {type: String}
     };
 

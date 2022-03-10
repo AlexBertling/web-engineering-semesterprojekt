@@ -2,10 +2,23 @@ import Einkaufsliste from '../src/components/Einkaufsliste.js';
 import { html } from 'lit';
 
 export default {
-  title: 'WEM/Einkaufsliste'
+  title: 'Components/Einkaufsliste',
+  argTypes: {
+    list: []
+  },
 };
 
-export const Empty = () => 
-    html`
-        <wem-einkaufsliste></wem-einkaufsliste>
-    `;
+const Template = ({list}) => html`
+  <wem-einkaufsliste list="${list}"></wem-einkaufsliste>
+`;
+
+
+export const Empty = Template.bind({});
+Empty.args = {
+  list: []
+}
+
+export const Complete = Template.bind({});
+Complete.args = {
+  list: ["Apfel", "Banane", "Kekse"]
+}

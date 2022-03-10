@@ -2,7 +2,7 @@ import WEMNavigator from '../src/components/Navigator';
 import { html } from 'lit';
 
 export default {
-    title: 'WEM/Navigator',
+    title: 'Components/Navigator',
     argTypes: {
         styleMode: {
             options: ["grid", "flex"],

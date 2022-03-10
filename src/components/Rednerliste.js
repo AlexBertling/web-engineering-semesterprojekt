@@ -14,7 +14,11 @@ class Rednerliste extends LitElement {
         }
     `;
     static properties = {
-        list: {}
+        list: {
+            converter: {
+                fromAttribute: (value, Array) => value ? value.split(",") : []
+            }
+        },
     }
 
     constructor() {
@@ -26,6 +30,7 @@ class Rednerliste extends LitElement {
         const input = this.shadowRoot.querySelector(".itemText");
         this.list.push(input.value);
         input.value = "";
+        this.shadowRoot.querySelectorAll("wem-redner").forEach(r => r.stopTimer());
         this.requestUpdate();
     }
 

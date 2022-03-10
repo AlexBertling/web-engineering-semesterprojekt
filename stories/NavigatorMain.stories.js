@@ -3,7 +3,7 @@ import { html } from 'lit';
 import { Vertical } from './NavigatorMenu.stories';
 
 export default {
-    title: 'WEM/NavigatorMain',
+    title: 'Components/NavigatorMain',
     argTypes: {
         styleMode: {
             options: ["grid", "flex"],

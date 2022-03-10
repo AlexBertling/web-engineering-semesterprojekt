@@ -36,7 +36,6 @@ class WEMApp extends LitElement {
     }
   `;
   static properties = {
-    styleMode: { type: String },
     data: {},
     nav1: { type: Array },
     nav2: { type: Array },
@@ -86,12 +85,9 @@ class WEMApp extends LitElement {
       <div class="app-container">
         <wem-navbar
           baseUrl="${document.baseURI}"
-          orientation="horizontal"
           items="${this.nav1}"
-          @menuClick="${this._handleMenu1Click}"
         ></wem-navbar>
         <wem-main
-          styleMode="${this.styleMode}"
           hideLeft="${this.nav1Selected ? false : true}"
         >
           <wem-menu
@@ -99,14 +95,13 @@ class WEMApp extends LitElement {
             baseUrl="${"/" + this.nav1Selected}"
             orientation="vertical"
             items="${this.nav2}"
-            @menuClick="${this._handleMenu2Click}"
           ></wem-menu>
           <div slot="center"><div id="routerOutlet"></div></div>
           <ul slot="right">
             ${this.references.map((r) => html`<li>${r}</li>`)}
           </ul>
         </wem-main>
-        <wem-footer></wem-footer>
+        <wem-footer content="Alexander Bertling © 2022"></wem-footer>
       </div>
     `;
   }
