@@ -423,25 +423,7 @@ export const appConfig = {
                 "title": "Rednerliste mit Zeitmessung",
                 "type": "html",
                 "url": "/assets/a42.html"
-            },
-            {
-                "title": "Tabellenkalkulation mit den Bordmitteln des Webs",
-                "type": "text",
-                "paragraphs": [
-                    {
-                        "title": "TODO",
-                    }
-                ]
-            },
-            {
-                "title": "HTML-Editor",
-                "type": "text",
-                "paragraphs": [
-                    {
-                        "title": "TODO",
-                    }
-                ]
-            },
+            }
         ],
         "Asynchron": [
             {
@@ -458,35 +440,6 @@ export const appConfig = {
                 "title": "Web Worker",
                 "type": "html",
                 "url": "/assets/a53.html"
-            },
-        ],
-        "SVG": [
-            {
-                "title": "Statistik-Balkendiagramm",
-                "type": "text",
-                "paragraphs": [
-                    {
-                        "title": "TODO",
-                    }
-                ]
-            },
-            {
-                "title": "Bezier-Animation",
-                "type": "text",
-                "paragraphs": [
-                    {
-                        "title": "TODO",
-                    }
-                ]
-            },
-            {
-                "title": "Kalligraphie-Editor",
-                "type": "text",
-                "paragraphs": [
-                    {
-                        "title": "TODO",
-                    }
-                ]
             },
         ],
         "Node & npm & Deno": [
