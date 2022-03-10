@@ -41,17 +41,12 @@ class WEMApp extends LitElement {
     nav2: { type: Array },
     nav1Selected: { type: String },
     nav2Selected: { type: String },
-    content: { type: String },
-    references: { type: Array },
   };
 
   constructor() {
     super();
-    this.nav1 = []; //["Home, News, Contact, About"];
-    this.nav2 = []; //["Item1", "Item2", "Item3"];
-    this.content = "";
-    this.references = [];
-    this.footerItems = ["Sitemap", "Home", "News", "Contact", "About"];
+    this.nav1 = [];
+    this.nav2 = [];
     this.applyAppConfig();
     window.addEventListener("vaadin-router-location-changed", (event) => {
       // nicht schön, aber Rerender sonst nicht möglich
@@ -97,9 +92,6 @@ class WEMApp extends LitElement {
             items="${this.nav2}"
           ></wem-menu>
           <div slot="center"><div id="routerOutlet"></div></div>
-          <ul slot="right">
-            ${this.references.map((r) => html`<li>${r}</li>`)}
-          </ul>
         </wem-main>
         <wem-footer content="Alexander Bertling © 2022"></wem-footer>
       </div>

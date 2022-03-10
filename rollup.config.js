@@ -18,11 +18,11 @@ const baseConfig = createSpaConfig({
   // development mode creates a non-minified build for debugging or development
   developmentMode: process.env.ROLLUP_WATCH === 'true',
 
-  // set to true to inject the service worker registration into your index.html
-  injectServiceWorker: true,
-
   // resolve all externals with import-map
   nodeResolve: false,
+
+  // set to true to inject the service worker registration into your index.html
+  injectServiceWorker: true,
 
   // customize workbox config
   workbox: {
@@ -57,6 +57,7 @@ export default merge(baseConfig, {
       // set flatten to false to preserve folder structure
       flatten: false,
     }),
+    
     rollupImportMapPlugin('./project.importmap')
   ],
 });
