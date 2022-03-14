@@ -13,4 +13,4 @@ Teil des Semesterprojekts sind außerdem folgende Repositories:
 - [PWA-Navigator](https://github.com/AlexBertling/wem-navigator-pwa) aus Übung 9
 - [Vue-Navigator](https://github.com/AlexBertling/wem-vue-navigator) aus Übung 10
 
-[In dieser PDF]() wird das Projekt vorgestellt.
+[In dieser PDF](docs/9028402_Presentation.pdf) wird das Projekt vorgestellt.
